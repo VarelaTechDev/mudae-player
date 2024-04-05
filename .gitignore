@@ -1,3 +1,7 @@
+# Logging Files
+vision_embed.txt
+vision.txt
+
 # Dependency directories
 node_modules/
 
@@ -127,7 +131,3 @@ dist
 *.tmp
 *.temp
 *.swp
-
-# Logging Files
-vision_embed.txt
-vision.txt
