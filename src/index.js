@@ -5,6 +5,7 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_
 
 client.on('ready', async () => {
 	console.log(`${client.user.username} is ready!`);
+	// client.user.setStatus('invisible')
 });
 
 function getRandomDelay(lowerBound, upperBound) {
@@ -34,6 +35,12 @@ client.on('messageCreate', async (message) => {
 		setTimeout(() => {
 			message.react('👍').catch(console.error);
 		}, getRandomDelay(300, 800));
+	}
+
+	if (message.author.id === process.env.AUTHOR) {
+		setTimeout(() => {
+			message.react('👍').catch(console.error);
+		}, getRandomDelay(500, 1100));
 	}
 
 	if (message.author.id === process.env.MUDAE_USER_ID) {
