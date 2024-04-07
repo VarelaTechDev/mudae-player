@@ -77,6 +77,15 @@ const killScheduleHours = () => {
 };
 
 
+// Example function to be scheduled
+// const customFunction = (message) => {
+// 	console.log(`${message} at:`, new Date().toLocaleTimeString());
+// };
+
+// Example usage: Schedule the customFunction to run every 10 seconds
+// scheduleTaskSeconds(10, customFunction, ['Function executed']);
+
+
 module.exports = {
 	scheduleTaskSeconds,
 	scheduleTaskMinutes,

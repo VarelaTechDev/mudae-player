@@ -84,4 +84,3 @@ function findInterval(time, intervalsData) {
 const currentTime = new Date().toTimeString().split(' ')[0].slice(0, 5);
 const currentInterval = findInterval(currentTime, intervals);
 console.log(currentInterval);
-
