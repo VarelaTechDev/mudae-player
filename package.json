@@ -6,9 +6,11 @@
   "scripts": {
     "start": "node -r dotenv/config src/index.js dotenv_config_path=.env.development.local",
     "start:dev": "npm run start",
-    "start:prod": "node -r dotenv/config src/index.js dotenv_config_path=.env.production.local"
+    "start:prod": "node -r dotenv/config src/index.js dotenv_config_path=.env.production.local",
+    "test": "jest"
   },
   "devDependencies": {
-    "eslint": "^8.57.0"
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0"
   }
 }

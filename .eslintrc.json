@@ -2,7 +2,8 @@
 	"extends": "eslint:recommended",
 	"env": {
 		"node": true,
-		"es6": true
+		"es6": true,
+		"jest": true
 	},
 	"parserOptions": {
 		"ecmaVersion": 2021
@@ -36,9 +37,9 @@
 		"semi": ["error", "always"],
 		"space-before-blocks": "error",
 		"space-before-function-paren": ["error", {
-			"anonymous": "never",
-			"named": "never",
-			"asyncArrow": "always"
+		"anonymous": "never",
+		"named": "never",
+		"asyncArrow": "always"
 		}],
 		"space-in-parens": "error",
 		"space-infix-ops": "error",
