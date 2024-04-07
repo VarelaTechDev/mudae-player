@@ -9,27 +9,46 @@ client.on('ready', () => {
     // client.user.setStatus('invisible');
 });
 
-function typeSlashCommand(message) {
-    // Simulate typing
-    message.channel.sendTyping();
+function typeSlashCommand(message, repetitions = 1) {
+    function sendCommand() {
+        // Stop if no repetitions left
+        if (repetitions <= 0) return;
 
-    // Wait for 100 ms then send the message
-    setTimeout(() => {
-        message.channel.send('$wa').catch(console.error);
-    }, 100);
+        // Simulate typing
+        message.channel.sendTyping();
+
+        // Wait for a random delay between 100 ms and 500 ms, then send the message
+        // Calculate random delay
+        const delay = Math.random() * (500 - 100) + 100;
+        setTimeout(() => {
+            // message.channel.send('$wa').catch(console.error);
+            message.channel.send(`I love you <3 ${repetitions}`).catch(console.error);
+            // Decrease the repetition count
+            repetitions--;
+            // Call recursively to send the next command
+            sendCommand();
+        }, delay);
+    }
+
+    // Start sending commands
+    sendCommand();
 }
 
-
 client.on('messageCreate', async (message) => {
-    if (message.author.id === process.env.AUTHOR && (message.content.startsWith('!k'))) {
+    if (message.author.id === process.env.AUTHOR && message.content.startsWith('!k')) {
         killScheduleMinutes();
         message.channel.send('Killed the scheduled task.').catch(console.error);
         return;
     }
 
-    if (message.author.id === process.env.AUTHOR && (message.content.startsWith('!s'))) {
-        scheduleTaskMinutes(1, typeSlashCommand, [message]);
+    if (message.author.id === process.env.AUTHOR && message.content.startsWith('!s')) {
+        const args = message.content.split(' ');
+        const repetitions = args.length > 1 ? parseInt(args[1], 10) : 1;
+        if (!isNaN(repetitions)) {
+            scheduleTaskMinutes(1, typeSlashCommand, [message, repetitions]);
+        }
     }
 });
+
 
 client.login(process.env.DISCORD_BOT_TOKEN).catch(console.error);
