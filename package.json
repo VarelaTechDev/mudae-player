@@ -7,10 +7,11 @@
     "start": "node -r dotenv/config src/index.js dotenv_config_path=.env.development.local",
     "start:dev": "npm run start",
     "start:prod": "node -r dotenv/config src/index.js dotenv_config_path=.env.production.local",
-    "analysis": "node -r dotenv/config src/analysis.js dotenv_config_path=.env.development.local"
+    "analysis": "node -r dotenv/config src/analysis.js dotenv_config_path=.env.development.local",
     "test": "jest",
     "puppet": "node -r dotenv/config src/puppet.js dotenv_config_path=.env.development.local",
-    "slash": "node -r dotenv/config src/slash.js dotenv_config_path=.env.development.local"
+    "slash": "node -r dotenv/config src/slash.js dotenv_config_path=.env.development.local",
+    "passive": "node -r dotenv/config src/passiveEye.js dotenv_config_path=.env.development.local"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
