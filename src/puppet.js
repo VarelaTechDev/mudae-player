@@ -59,7 +59,7 @@ client.on('messageCreate', async (message) => {
 
         // Validate channel ID and message
         if (!channelId || !messageToSend) {
-            message.author.send("Error: Invalid format. Please send the message in '<Channel_ID> <Message>' format.").catch(console.error);
+            message.author.send('Error: Invalid format. Please send the message in \'<Channel_ID> <Message>\' format.').catch(console.error);
             return;
         }
 
