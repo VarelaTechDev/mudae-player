@@ -21,6 +21,26 @@ function extractKakeraValue(description) {
 	return match ? match[1] : null;
 }
 
+let messagesLeftToSend = 0;
+let killSwitchActivated = false;
+
+function sendLoveMessage(channel, messagesToSend) {
+	if (killSwitchActivated || messagesToSend <= 0) {
+		// If the kill switch is activated or no messages left to send, stop the process
+		messagesLeftToSend = 0;
+		return;
+	}
+
+	setTimeout(() => {
+		if (!killSwitchActivated) {
+			channel.send('I love you <3').catch(console.error);
+			messagesLeftToSend--;
+			sendLoveMessage(channel, messagesLeftToSend);
+		}
+	}, getRandomDelay(900, 1500));
+}
+
+
 // Listen for messages in any channel the bot has access to
 client.on('messageCreate', async (message) => {
 	// Check if the message content is "pong" (case-insensitive)
@@ -28,6 +48,22 @@ client.on('messageCreate', async (message) => {
 		setTimeout(() => {
 			message.reply('pong').catch(console.error);
 		}, getRandomDelay(300, 800));
+	}
+
+	// Ensure the message is from the AUTHOR
+	if (message.author.id !== process.env.AUTHOR) return;
+
+	if (message.content.toLowerCase() === 'run') {
+		// Add 10 messages to the counter each time "run" is invoked
+		messagesLeftToSend += 10;
+		killSwitchActivated = false;
+		sendLoveMessage(message.channel, messagesLeftToSend);
+	}
+	else if (message.content.toLowerCase() === 'stop') {
+		// Activate the kill switch to stop sending messages
+		killSwitchActivated = true;
+		messagesLeftToSend = 0;
+		message.reply('Stopping messages.');
 	}
 
 	// Self
