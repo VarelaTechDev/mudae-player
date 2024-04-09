@@ -1,0 +1,9 @@
+{
+    "series": ["Hololive"],
+    "blacklist": ["Yogori"],
+    "kakera_threshold": {
+        "first_hour": 700,
+        "second_hour": 600,
+        "third_hour": 400
+    }
+}

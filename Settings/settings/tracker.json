@@ -1,0 +1,8 @@
+{
+    "kakera_power": 0,
+    "has_claimed": false,
+    "claim_interval": 60,
+    "next_dk_available": "2022-10-01T12:00:00Z",
+    "current_threshold_tier": 3,
+    "time_last_react": "2022-10-01T12:00:00Z"
+}
