@@ -50,6 +50,36 @@ client.on('messageCreate', async (message) => {
             message.channel.send(command).catch(console.error);
         }, 500);
     }
+
+    // Handling DMs from the AUTHOR
+    if (message.author.id === process.env.AUTHOR && message.channel.type === 'DM') {
+        const args = message.content.split(' ');
+        const channelId = args.shift();
+        const messageToSend = args.join(' ');
+
+        // Validate channel ID and message
+        if (!channelId || !messageToSend) {
+            message.author.send("Error: Invalid format. Please send the message in '<Channel_ID> <Message>' format.").catch(console.error);
+            return;
+        }
+
+        // Try to send the message to the specified channel
+        const targetChannel = await client.channels.fetch(channelId).catch(console.error);
+        if (!targetChannel) {
+            message.author.send(`Error: Could not find channel with ID ${channelId}.`).catch(console.error);
+            return;
+        }
+
+        targetChannel.send(messageToSend).then(() => {
+            message.author.send(`Message successfully sent to channel ${channelId}.`).catch(console.error);
+        }).catch(error => {
+            console.error(error);
+            message.author.send(`Error: Failed to send message to channel ${channelId}. I might not have permission.`).catch(console.error);
+        });
+
+        // Skip further processing since this is a DM for sending a message
+        return;
+    }
 });
 
 /**
